@@ -33,4 +33,12 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(outputbuf)
+	cmds := []string{"date"}
+	imageConfig := docker.Config{Image: "test", Cmd: cmds, AttachStdout: true, AttachStderr: true}
+	containerOptions := docker.CreateContainerOptions{Name: "hola", Config: &imageConfig}
+	cont, err := client.CreateContainer(containerOptions)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(cont)
 }
